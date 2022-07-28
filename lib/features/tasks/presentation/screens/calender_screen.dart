@@ -29,7 +29,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         builder: (context, state) {
           var cubit = TasksCubit.get(context);
           return DefaultScaffold(
-            height: 100,
+            height: 50,
+            width: 10,
             title: 'Schedule',
             cubit: cubit,
             body: SingleChildScrollView(
@@ -39,26 +40,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   builder: (context, state) {
                     var cubit = TasksCubit.get(context);
                     return Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
                             fit: FlexFit.tight,
-                            flex: 3,
+                            flex: 1,
                             child: TableCalendar<TasksCubit>(
+                              calendarFormat: CalendarFormat.week,
+                              availableGestures: AvailableGestures.all,
                               shouldFillViewport: true,
                               // eventLoader: (dateTime) {
-                              //   // return cubit.groups[
-                              //   //         formatter.parse(formatter.format(dateTime))] ??
-                              //   //     [];
+                              //   return cubit.groups[formatter
+                              //           .parse(formatter.format(dateTime))] ??
+                              //       [];
                               // },
                               daysOfWeekStyle: const DaysOfWeekStyle(
                                 weekdayStyle: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.w500),
                                 weekendStyle: TextStyle(
-                                    color: AppColors.taskYellow,
+                                    color: AppColors.taskRed,
                                     fontWeight: FontWeight.w500),
                               ),
                               startingDayOfWeek: StartingDayOfWeek.saturday,
@@ -89,7 +92,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             height: 15.h,
                           ),
                           Flexible(
-                            flex: 3,
+                            flex: 5,
                             fit: FlexFit.tight,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

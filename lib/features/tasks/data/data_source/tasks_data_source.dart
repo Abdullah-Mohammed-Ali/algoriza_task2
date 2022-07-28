@@ -24,11 +24,12 @@ class TasksDataSource extends DataSource<TaskModel> {
   @override
   Future<Unit?> deleteTask(model) async {
     try {
+      print(model.id);
       await _database.transaction((txn) async {
         return await txn.delete(
           taskTableName,
-          where: '${TasksTableHeader.title} = ?',
-          whereArgs: [model.title],
+          where: '${TasksTableHeader.id} = ?',
+          whereArgs: [model.id],
         );
       });
     } catch (e) {

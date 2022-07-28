@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:to_do_task2/constatns/String/tasks_tables_headers.dart';
 import 'package:to_do_task2/features/tasks/domain/entity/task.dart';
 import 'package:to_do_task2/features/tasks/presentation/screens/navigation/all_task_screen.dart';
 
+import '../../../../core/functions/get_time_date.dart';
 import '../../domain/use_case/create_task_use_case.dart';
 import '../../domain/use_case/delete_task_use_case.dart';
 import '../../domain/use_case/get_tasks_use_case.dart';
@@ -18,9 +20,13 @@ import '../screens/navigation/uncompleted_task_screen.dart';
 part 'tasks_state.dart';
 
 class TasksCubit extends Cubit<TasksState> {
-  TasksCubit(this._createTaskUseCase, this._updateTaskUseCase,
-      this._deleteTaskUseCase, this._getTasksUseCase)
-      : super(TasksInitial());
+  TasksCubit(
+    this._createTaskUseCase,
+    this._updateTaskUseCase,
+    this._deleteTaskUseCase,
+    this._getTasksUseCase,
+    // this._notificationUseCase,
+  ) : super(TasksInitial());
 
   int tabBarIndex = 0;
   static TasksCubit get(context) => BlocProvider.of(context);
@@ -34,6 +40,7 @@ class TasksCubit extends Cubit<TasksState> {
   final UpdateTaskUseCase _updateTaskUseCase;
   final DeleteTaskUseCase _deleteTaskUseCase;
   final GetTasksUseCase _getTasksUseCase;
+  // final ScheduledNotificationUseCase _notificationUseCase;
 
   var titleController = TextEditingController();
   var dateController = TextEditingController();
@@ -62,6 +69,8 @@ class TasksCubit extends Cubit<TasksState> {
       (l) => print(l.msg),
       (r) => print('created'),
     );
+    // NotificationParams params = NotificationParams(task);
+    // await _notificationUseCase.call(params);
   }
 
   Map<DateTime, List<TaskEntity>> groups = {};
@@ -74,6 +83,7 @@ class TasksCubit extends Cubit<TasksState> {
     }
     print('click');
     var result = await _getTasksUseCase.call(parameters);
+
     print(result);
     result?.fold(
       (l) {
@@ -83,11 +93,15 @@ class TasksCubit extends Cubit<TasksState> {
       },
       (r) {
         print('got it');
+
         if (field == TasksTableHeader.favorite) {
           favTasks = r ?? [];
         } else {
           allTasks = r ?? [];
         }
+        groups = groupBy(r!, (TaskEntity p0) {
+          return formatter.parse(p0.date);
+        });
         print(r);
         emit(TaskCreateSuccess());
       },

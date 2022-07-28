@@ -17,7 +17,12 @@ import 'features/tasks/presentation/bloc/tasks_cubit.dart';
 var sl = GetIt.instance;
 Future<void> init() async {
   // tasks bloc...
-  sl.registerFactory(() => TasksCubit(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => TasksCubit(
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+      ));
 
   // Use cases for
   sl.registerLazySingleton(() => CreateTaskUseCase(sl()));
