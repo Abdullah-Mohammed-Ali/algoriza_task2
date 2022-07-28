@@ -38,13 +38,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 child: BlocBuilder<TasksCubit, TasksState>(
                   builder: (context, state) {
                     var cubit = TasksCubit.get(context);
-
                     return Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20,),
                           Flexible(
                             fit: FlexFit.tight,
                             flex: 3,
@@ -91,7 +89,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             height: 15.h,
                           ),
                           Flexible(
-                            flex: 4,
+                            flex: 3,
                             fit: FlexFit.tight,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

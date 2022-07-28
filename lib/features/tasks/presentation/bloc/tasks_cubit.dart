@@ -131,4 +131,15 @@ class TasksCubit extends Cubit<TasksState> {
     );
     await getTasks();
   }
+
+  Future<Unit?> deleteTask(TaskEntity task) async {
+    DeleteParameters parameters = DeleteParameters(task);
+    print('click');
+    var result = await _deleteTaskUseCase.call(parameters);
+    result?.fold(
+      (l) => print(l.msg),
+      (r) => print('Deleted'),
+    );
+    await getTasks();
+  }
 }
