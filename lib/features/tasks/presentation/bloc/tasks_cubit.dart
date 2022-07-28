@@ -64,6 +64,7 @@ class TasksCubit extends Cubit<TasksState> {
     );
   }
 
+  Map<DateTime, List<TaskEntity>> groups = {};
   Future<Unit?> getTasks({String? field, dynamic value}) async {
     GetTasksParameters parameters;
     if (field == TasksTableHeader.favorite) {

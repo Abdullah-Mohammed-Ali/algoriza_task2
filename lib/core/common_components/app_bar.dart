@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:to_do_task2/routing/routes_names.dart';
 
 import '../../constatns/String/board_bar_titles.dart';
 import '../../constatns/colors.dart';
@@ -19,7 +20,9 @@ AppBar generalAppBar(
     actions: tabBarExists
         ? [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutesNames.calendarScreen);
+                },
                 icon: const Icon(
                   Icons.calendar_today,
                   color: AppColors.textSelected,

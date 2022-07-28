@@ -1,12 +1,12 @@
-const String fiveMinutesBefore = '5 Minutes early';
+const String dayBefore = '1 Day early';
 const String tenMinutesBefore = '10 Minutes early';
-const String fifteenMinutesBefore = '15 Minutes early';
+const String hourBefore = '15 Minutes early';
 const String thirtyMinutesBefore = '30 Minutes early';
 const List<String> remindList = [
-  fiveMinutesBefore,
+  dayBefore,
+  hourBefore,
+  thirtyMinutesBefore,
   tenMinutesBefore,
-  fifteenMinutesBefore,
-  thirtyMinutesBefore
 ];
 
 const String kDaily = 'daily';

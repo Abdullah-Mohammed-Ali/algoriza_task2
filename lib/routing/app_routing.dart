@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_task2/features/tasks/presentation/bloc/tasks_cubit.dart';
+import 'package:to_do_task2/features/tasks/presentation/screens/calender_screen.dart';
 import 'package:to_do_task2/routing/routes_names.dart';
 
 import '/dependency_container.dart' as di;
@@ -20,6 +21,11 @@ class AppRouting {
         return fadeInPageBuilder(BlocProvider(
           create: (context) => cubit,
           child: CreateTaskScreen(),
+        ));
+      case AppRoutesNames.calendarScreen:
+        return fadeInPageBuilder(BlocProvider(
+          create: (context) => cubit,
+          child: CalendarScreen(),
         ));
     }
   }
